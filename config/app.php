@@ -166,17 +166,17 @@ return [
         /*
          * Package Service Providers...
          */
-
-        //
+        Migrator\MigrationServiceProvider::class,
 
         /*
-         * Application Service Providers...
+         * Domains Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        LaravelApi\Domains\Users\Providers\DomainServiceProvider::class,
+
+        /*
+         * Units Service Providers...
+         */
+        LaravelApi\Units\Auth\Providers\UnitServiceProvider::class,
 
     ],
 
