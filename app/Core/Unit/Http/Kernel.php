@@ -3,6 +3,10 @@
 namespace LaravelApi\Core\Unit\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use LaravelApi\Core\Unit\Http\Middleware\AlwaysExpectsJson;
+use LaravelApi\Core\Unit\Http\Middleware\EncryptCookies;
+use LaravelApi\Core\Unit\Http\Middleware\RedirectIfAuthenticated;
+use LaravelApi\Core\Unit\Http\Middleware\VerifyCsrfToken;
 
 class Kernel extends HttpKernel
 {
@@ -15,6 +19,7 @@ class Kernel extends HttpKernel
      */
     protected $middleware = [
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
+        AlwaysExpectsJson::class,
     ];
 
     /**
@@ -24,11 +29,11 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         'web' => [
-            \LaravelApi\Http\Middleware\EncryptCookies::class,
+            EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            \LaravelApi\Http\Middleware\VerifyCsrfToken::class,
+            VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
@@ -50,7 +55,7 @@ class Kernel extends HttpKernel
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
-        'guest' => \LaravelApi\Http\Middleware\RedirectIfAuthenticated::class,
+        'guest' => RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
     ];
 }
