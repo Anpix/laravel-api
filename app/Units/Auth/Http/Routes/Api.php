@@ -18,7 +18,7 @@ class Api extends Router
         // user routes
         $this->router->get('user', function (Request $request) {
             return $request->user();
-        });
+        })->middleware('auth:api');
 
         // login routes
         $this->router->post('login', 'LoginController@login');
